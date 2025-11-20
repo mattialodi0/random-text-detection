@@ -104,14 +104,15 @@ def generate_dataset(
     # -------------------------------
     # Save dataset
     # -------------------------------
-
+    train_path = "train_dataset_128"
+    val_path = "val_dataset_128"
     if format == "csv":
-        with open("train_dataset.csv", "w", newline="", encoding="utf-8") as f:
+        with open(train_path+".csv", "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f, quoting=csv.QUOTE_ALL)
             writer.writerow(["text", "label"])
             for text, label in train_dataset:
                 writer.writerow([text, label])
-        with open("val_dataset.csv", "w", newline="", encoding="utf-8") as f:
+        with open(val_path+".csv", "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f, quoting=csv.QUOTE_ALL)
             writer.writerow(["text", "label"])
             for text, label in val_dataset:
@@ -119,10 +120,10 @@ def generate_dataset(
         print(f"[OK] CSV dataset saved")
 
     elif format == "jsonl":
-        with open("train_dataset.json", "w", encoding="utf-8") as f:
+        with open(train_path+".json", "w", encoding="utf-8") as f:
             for text, label in train_dataset:
                 f.write(json.dumps({"text": text, "label": label}) + "\n")
-        with open("val_dataset.json", "w", encoding="utf-8") as f:
+        with open(train_path+".json", "w", encoding="utf-8") as f:
             for text, label in val_dataset:
                 f.write(json.dumps({"text": text, "label": label}) + "\n")
         print(f"[OK] JSONL dataset saved")
